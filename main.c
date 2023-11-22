@@ -1,8 +1,8 @@
 #include "forca.h"
 #include <ctype.h>
 #include <stdio.h>
-#include <string.h>
 #include <stdlib.h>
+#include <string.h>
 
 void limparTela()
 {
@@ -43,11 +43,21 @@ int main()
         if (strlen(entrada) == 2 && isalpha(entrada[0]))
         {
             palpite = tolower(entrada[0]);
-            if (!processaPalpite(&meuJogo, palpite))
+            if (strchr(meuJogo.tentativasIncorretas, palpite) == NULL)
             {
-                printf("Palpite incorreto!\n");
-                meuJogo.tentativas--;
-                meuJogo.erros++;
+
+                if (!processaPalpite(&meuJogo, palpite))
+                {
+                    meuJogo.tentativas--;
+                    meuJogo.erros++;
+                }
+            }
+            else
+            {
+
+                printf("Você já tentou essa letra. Tente outra.\n");
+                printf("Pressione qualquer tecla para continuar...");
+                getchar();
             }
         }
         else
