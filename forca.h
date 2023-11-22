@@ -25,5 +25,6 @@ void exibeEstado(const JogoForca *jogo);
 int processaPalpite(JogoForca *jogo, char palpite);
 void liberaJogo(JogoForca *jogo);
 void desenhaForca(int erros);
+void limparTela();
 
 #endif

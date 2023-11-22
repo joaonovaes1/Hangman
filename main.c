@@ -17,11 +17,13 @@ int main()
 {
     JogoForca meuJogo;
     char entrada[100];
+    char palavraSecreta[100];
     char palpite;
 
     printf("Digite a palavra secreta: ");
     fgets(entrada, 100, stdin);
-    entrada[strcspn(entrada, "\n")] = 0; // Remove newline
+    entrada[strcspn(entrada, "\n")] = 0;
+    strcpy(palavraSecreta, entrada);
     for (int i = 0; entrada[i] != '\0'; i++)
     {
         entrada[i] = tolower(entrada[i]);
@@ -52,11 +54,10 @@ int main()
         {
             printf("Erro: Por favor, insira apenas uma letra.\n");
             printf("Pressione qualquer tecla para continuar...");
-            getchar(); // Pausa até que o usuário pressione uma tecla
+            getchar();
             continue;
         }
 
-        // Verificar se o jogo foi ganho
         int ganhou = 1;
         No *atual = meuJogo.palpite;
         while (atual != NULL)
@@ -74,7 +75,7 @@ int main()
             limparTela();
             exibeEstado(&meuJogo);
             desenhaForca(meuJogo.erros);
-            printf("Parabéns! Você adivinhou a palavra: %s\n", entrada);
+            printf("Parabéns! Você adivinhou a palavra: %s\n", palavraSecreta);
             break;
         }
     }
@@ -84,7 +85,7 @@ int main()
         limparTela();
         exibeEstado(&meuJogo);
         desenhaForca(meuJogo.erros);
-        printf("Game over! A palavra era: %s\n", entrada);
+        printf("Game over! A palavra era: %s\n", palavraSecreta);
     }
 
     liberaJogo(&meuJogo);
